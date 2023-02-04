@@ -13,7 +13,7 @@ const Navbar = () => {
                 News
             </div>
             <div className={s.navbarItem}>
-                Music
+                Musics
             </div>
         </div>
     );
