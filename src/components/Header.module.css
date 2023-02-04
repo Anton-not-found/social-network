@@ -1,0 +1,22 @@
+.header {
+    /*border: 1px solid #f80202;*/
+    background-color: aqua;
+    display: flex;
+
+}
+
+.headerLogo {
+    /*border: 1px solid #56f806;*/
+
+
+}
+
+
+.headerLogo img {
+    /*border: 1px solid #faef24;*/
+
+    padding-left: 100px;
+
+    height: 70px;
+    width: 220px;
+}
