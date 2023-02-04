@@ -4,16 +4,16 @@ const Navbar = () => {
     return (
         <div className={s.navbar}>
             <div className={s.navbarItem}>
-                Profile
+                <a>Profile</a>
             </div>
             <div className={s.navbarItem}>
-                Messages
+                <a>Messages</a>
             </div>
             <div className={s.navbarItem}>
-                News
+                <a>News</a>
             </div>
             <div className={s.navbarItem}>
-                Musics
+                <a>Musics</a>
             </div>
         </div>
     );
