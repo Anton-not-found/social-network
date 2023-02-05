@@ -3,3 +3,7 @@
     background-color: #fdb4a0;
     color: aliceblue;
 }
+
+.navbarItem.active {
+    color: gold;
+}
