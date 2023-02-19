@@ -2,8 +2,17 @@
     grid-area: n;
     background-color: #fdb4a0;
     color: aliceblue;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
-.navbarItem.active {
-    color: gold;
+.item {
+    text-decoration: none;
+    color: white;
+    padding-top: 10px;
+}
+
+.active {
+    text-decoration: none;
+    color: #ffdc21;
 }

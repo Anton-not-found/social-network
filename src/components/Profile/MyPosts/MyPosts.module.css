@@ -1,0 +1,23 @@
+.myPosts {
+padding: 10px;
+}
+
+.texareaButton {
+    display: flex;
+}
+
+.texareaButton textarea {
+    width: 200px;
+    height: 30px;
+    border-radius: 6px;
+}
+
+.texareaButton button {
+    margin-left: 15px;
+    border-radius: 6px;
+}
+
+.postItem{
+    padding-top: 20px;
+
+}
