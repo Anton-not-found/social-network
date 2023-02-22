@@ -2,6 +2,7 @@ import React from 'react';
 import s from './MessageItem.module.css';
 
 type MesssageItemPropsType = {
+    id: number
     message: string
 }
 
