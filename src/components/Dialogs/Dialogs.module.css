@@ -7,23 +7,22 @@
 
 .dialogsItem {
     padding: 10px;
-
 }
-
-.dialogsItem .active {
-    color: gold;
-
-}
-
-dialog {
-
-}
-
 
 .messagesItem {
     padding: 10px;
+    font-family: 'Shantell Sans';
+    color: #032d62;
 }
 
-.messages {
+.dialogsItem a {
 
+    text-decoration: none;
 }
+
+.dialogsItem .active a {
+    color: gold;
+}
+
+
+

@@ -1,7 +1,10 @@
-.dialog {
-    color: white;
+.dialog a{
 }
 
-.active {
-    color: white;
+.active a{
+
+}
+
+.dialogItem a{
+
 }

@@ -1,0 +1,26 @@
+
+.sidebarFriends{
+    background-color: coral;
+
+}
+
+h3 {
+    padding: 20px;
+    color: white;
+}
+
+.sidebarFriendsItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.item{
+color: white;
+}
+
+.item img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}

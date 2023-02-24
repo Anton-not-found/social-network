@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {state} from "./redux/state";
+import {SidebarFriends} from "./components/SidebarFriends/SidebarFriends";
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
+                <SidebarFriends/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile posts={state.profilePage.posts}/>}/>
@@ -27,6 +29,10 @@ const App = () => {
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>
+                </div>
+
+                <div className='sidebarFriends'>
+
                 </div>
             </div>
         </BrowserRouter>
