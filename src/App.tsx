@@ -8,7 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {state} from "./redux/state";
+import {addPost, state} from "./redux/state";
 import {SidebarFriends} from "./components/SidebarFriends/SidebarFriends";
 
 
@@ -21,7 +21,8 @@ const App = () => {
                 <SidebarFriends/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile posts={state.profilePage.posts}/>}/>
+                        <Route path='/profile' element={<Profile posts={state.profilePage.posts}
+                                                                 addPost={addPost}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={state.dialogsPage.dialogs}
                                                                    messages={state.dialogsPage.messages}
                         />}/>

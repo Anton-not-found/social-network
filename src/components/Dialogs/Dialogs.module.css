@@ -1,12 +1,12 @@
 .dialogs {
     display: grid;
-    grid-template-rows: 80px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 2fr 2fr;
 
 }
 
 .dialogsItem {
-    padding: 10px;
+
 }
 
 .messagesItem {
@@ -22,6 +22,10 @@
 
 .dialogsItem .active a {
     color: gold;
+}
+
+.textarea{
+
 }
 
 

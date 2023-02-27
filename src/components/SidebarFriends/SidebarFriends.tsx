@@ -2,10 +2,6 @@ import React from 'react';
 import s from './SidebarFriends.module.css';
 
 
-/*
-let friendsData = [
-    {id: 1, name: 'Andrew', }
-]*/
 
 
 export const SidebarFriends = () => {

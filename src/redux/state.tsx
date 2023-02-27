@@ -1,15 +1,18 @@
+import {useState} from "react";
+import {v1} from "uuid";
+
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
 
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 
-export type PostType ={
-    id: number
+export type PostType = {
+    id: string
     message: string
     likesCount: string
 }
@@ -20,35 +23,47 @@ export type ProfilePageType = {
 
 export type DialogsPageType = {
     dialogs: Array<DialogType>
-    messages:Array<MessageType>
+    messages: Array<MessageType>
 }
 
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export let state: RootStateType = {
+export const state: RootStateType = {
     profilePage: {
         posts: [
-            {id: 1, message: 'Hi! How are you man?', likesCount: '0'},
-            {id: 2, message: 'It is my first post))', likesCount: '6'},
-            {id: 3, message: 'let\'s do it', likesCount: '15'},
-            {id: 4, message: 'Are you sure?', likesCount: '4'}
+            {id: v1(), message: 'Hi! How are you man?', likesCount: '3'},
+            {id: v1(), message: 'It\'s my first post))', likesCount: '6'},
+            {id: v1(), message: 'let\'s do it', likesCount: '15'},
+            {id: v1(), message: 'Are you sure?', likesCount: '4'}
         ]
     },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Anton'},
-            {id: 2, name: 'Elena'},
-            {id: 3, name: 'Stepan'},
-            {id: 4, name: 'Mariya'},
+            {id: v1(), name: 'Anton'},
+            {id: v1(), name: 'Elena'},
+            {id: v1(), name: 'Stepan'},
+            {id: v1(), name: 'Mariya'},
+
         ],
         messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'What are you learn?'},
-            {id: 4, message: 'Oh my!'}
+            {id: v1(), message: 'Hi'},
+            {id: v1(), message: 'How are you?'},
+            {id: v1(), message: 'What are you learn?'},
+            {id: v1(), message: 'Oh my!'}
         ]
     }
+}
+
+export const addPost = (postMessage: string) => {
+
+    const newPost: PostType = {
+        id: v1(),
+        message: postMessage,
+        likesCount: '0'
+    };
+
+    state.profilePage.posts.push(newPost);
 }
 
