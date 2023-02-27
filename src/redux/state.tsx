@@ -1,5 +1,5 @@
-import {useState} from "react";
 import {v1} from "uuid";
+import {rerenderEntireTree} from "../render";
 
 export type DialogType = {
     id: string
@@ -65,5 +65,6 @@ export const addPost = (postMessage: string) => {
     };
 
     state.profilePage.posts.push(newPost);
+    rerenderEntireTree();
 }
 

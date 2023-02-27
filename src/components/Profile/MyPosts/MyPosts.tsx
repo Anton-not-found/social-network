@@ -21,6 +21,7 @@ export const MyPosts = (props: ProfilePageType) => {
     const onClickButtonHandler = () => {
         if (postMessageRef.current) {
             props.addPost(postMessageRef.current.value)
+            postMessageRef.current.value = '';
         }
     }
 
