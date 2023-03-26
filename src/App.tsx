@@ -4,17 +4,23 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, state} from "./redux/state";
+import { RootStateType, state} from "./redux/state";
 import {SidebarFriends} from "./components/SidebarFriends/SidebarFriends";
 
+type AppPropsType = {
+    state:RootStateType
+    addPost:()=>void
+    changeNewText:(newText: string)=>void
 
-const App = () => {
+}
+
+const App = (props:AppPropsType) => {
     return (
-        <BrowserRouter>
+
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -22,7 +28,11 @@ const App = () => {
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile posts={state.profilePage.posts}
-                                                                 addPost={addPost}/>}/>
+                                                                 messagePost={state.profilePage.messageForNewPost}
+                                                                 addPost={props.addPost}
+                                                                 changeNewText={props.changeNewText}
+
+                        />}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={state.dialogsPage.dialogs}
                                                                    messages={state.dialogsPage.messages}
                         />}/>
@@ -36,7 +46,7 @@ const App = () => {
 
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 

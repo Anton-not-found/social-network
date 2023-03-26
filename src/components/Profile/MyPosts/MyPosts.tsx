@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 
-export type ProfilePageType = {
+export type ProfilePagePropsType = {
     posts: Array<PostType>
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    changeNewTextCallback: (newText: string) => void
+    messagePost: string
 }
 
 export type PostType = {
@@ -12,26 +14,25 @@ export type PostType = {
     message: string
     likesCount: string
 }
-export const MyPosts = (props: ProfilePageType) => {
+export const MyPosts = (props: ProfilePagePropsType) => {
 
     let postsDataElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
-    let postMessageRef = React.createRef<HTMLTextAreaElement>();  //создаём ссылку для привязки к value
-
+    console.log(props.messagePost)
     const onClickButtonHandler = () => {
-        if (postMessageRef.current) {
-            props.addPost(postMessageRef.current.value)
-            postMessageRef.current.value = '';
-        }
+        props.addPost()
     }
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewTextCallback(e.currentTarget.value)
 
+    }
 
     return (
         <div className={s.myPosts}>
             <div className={s.posts}>
                 <h3> My posts </h3>
                 <div className={s.texareaButton}>
-                    <textarea ref={postMessageRef}></textarea>
+                    <textarea value={props.messagePost} onChange={onChangeHandler}/>
                     <button onClick={onClickButtonHandler}>Add post</button>
                 </div>
                 <div className={s.postItem}>

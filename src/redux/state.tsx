@@ -1,5 +1,11 @@
 import {v1} from "uuid";
-import {rerenderEntireTree} from "../render";
+
+
+let rerenderEntireTree = ()=> {
+    console.log('state changed BLA BLA')
+}
+
+
 
 export type DialogType = {
     id: string
@@ -19,6 +25,7 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    messageForNewPost: string
 }
 
 export type DialogsPageType = {
@@ -37,7 +44,8 @@ export const state: RootStateType = {
             {id: v1(), message: 'It\'s my first post))', likesCount: '6'},
             {id: v1(), message: 'let\'s do it', likesCount: '15'},
             {id: v1(), message: 'Are you sure?', likesCount: '4'}
-        ]
+        ],
+        messageForNewPost: ''
     },
     dialogsPage: {
         dialogs: [
@@ -56,15 +64,27 @@ export const state: RootStateType = {
     }
 }
 
-export const addPost = (postMessage: string) => {
+export const changeNewText = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
+    rerenderEntireTree();
+    console.log(newText)
+}
 
+export const addPost = () => {
     const newPost: PostType = {
         id: v1(),
-        message: postMessage,
+        message: state.profilePage.messageForNewPost,
         likesCount: '0'
-    };
-
+    }
+    console.log(postMessage)
     state.profilePage.posts.push(newPost);
+    state.profilePage.messageForNewPost = ''
     rerenderEntireTree();
 }
+
+export const subscriber = (observer:()=>void) => {
+    rerenderEntireTree = observer;
+}
+
+
 

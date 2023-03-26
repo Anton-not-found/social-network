@@ -5,9 +5,12 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
 
+
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPost: (postMessage: string)=> void
+    addPost: ()=> void
+    messagePost:string
+    changeNewText:(newText: string)=>void
 }
 
 export type PostType ={
@@ -22,7 +25,10 @@ export const Profile = (props:ProfilePageType) => {
         <div className={s.profile}>
             <ProfileInfo />
             <MyPosts posts={props.posts}
-                     addPost={props.addPost}/>
+                     addPost={props.addPost}
+                     messagePost={props.messagePost}
+                     changeNewTextCallback={props.changeNewText}
+            />
         </div>
     );
 };
