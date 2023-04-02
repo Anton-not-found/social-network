@@ -8,7 +8,7 @@ import { Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import { RootStateType, state} from "./redux/state";
+import { RootStateType} from "./redux/state";
 import {SidebarFriends} from "./components/SidebarFriends/SidebarFriends";
 
 type AppPropsType = {
@@ -27,14 +27,14 @@ const App = (props:AppPropsType) => {
                 <SidebarFriends/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile posts={state.profilePage.posts}
-                                                                 messagePost={state.profilePage.messageForNewPost}
+                        <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
+                                                                 messagePost={props.state.profilePage.messageForNewPost}
                                                                  addPost={props.addPost}
                                                                  changeNewText={props.changeNewText}
 
                         />}/>
-                        <Route path='/dialogs/*' element={<Dialogs dialogs={state.dialogsPage.dialogs}
-                                                                   messages={state.dialogsPage.messages}
+                        <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
+                                                                   messages={props.state.dialogsPage.messages}
                         />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
