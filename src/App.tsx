@@ -8,33 +8,34 @@ import { Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import { RootStateType} from "./redux/state";
-import {SidebarFriends} from "./components/SidebarFriends/SidebarFriends";
+import {DispatchTsarType, RootStateType} from "./redux/state";
+import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppPropsType = {
     state:RootStateType
-    addPost:()=>void
-    changeNewText:(newText: string)=>void
-
+    dispatch:(action:DispatchTsarType)=>void
 }
 
-const App = (props:AppPropsType) => {
+const App: React.FC<AppPropsType> = (props) => {
     return (
 
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
-                <SidebarFriends/>
+                <Sidebar/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
                                                                  messagePost={props.state.profilePage.messageForNewPost}
-                                                                 addPost={props.addPost}
-                                                                 changeNewText={props.changeNewText}
+                                                                 dispatch={props.dispatch}
+
 
                         />}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                    messages={props.state.dialogsPage.messages}
+                                                                   newMessageBody={props.state.dialogsPage.newMessageBody}
+                                                                   dispatch={props.dispatch}
+
                         />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>

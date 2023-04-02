@@ -2,15 +2,14 @@ import React from 'react';
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-
-
+import {DispatchTsarType} from "../../redux/state";
 
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPost: ()=> void
+    dispatch: (action:DispatchTsarType)=> void
     messagePost:string
-    changeNewText:(newText: string)=>void
+
 }
 
 export type PostType ={
@@ -25,9 +24,9 @@ export const Profile = (props:ProfilePageType) => {
         <div className={s.profile}>
             <ProfileInfo />
             <MyPosts posts={props.posts}
-                     addPost={props.addPost}
+                     dispatch={props.dispatch}
                      messagePost={props.messagePost}
-                     changeNewTextCallback={props.changeNewText}
+
             />
         </div>
     );

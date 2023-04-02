@@ -1,5 +1,5 @@
 
-.sidebarFriends{
+.sidebar{
     background-color: coral;
 
 }
@@ -9,7 +9,7 @@ h3 {
     color: white;
 }
 
-.sidebarFriendsItem {
+.sidebarItem {
     display: flex;
     justify-content: space-between;
     padding: 10px;
