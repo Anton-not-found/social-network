@@ -1,13 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
-import {RootActionType} from "../../../index";
 
 export type ProfilePagePropsType = {
     posts: Array<PostType>
-    dispatch: (action: RootActionType) => void
     messagePost: string
+    updateNewPostText:(text:string)=>void
+    addPost: ()=>void
 }
 
 export type PostType = {
@@ -22,11 +21,11 @@ export const MyPosts = (props: ProfilePagePropsType) => {
 
     console.log(props.messagePost)
     const onClickButtonHandler = () => {
-        props.dispatch(addPostAC())
+        props.addPost();
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(changeNewTextAC(text))
+        props.updateNewPostText(text)
     }
 
     return (
