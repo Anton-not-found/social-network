@@ -6,7 +6,8 @@ import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {ProfilePageType, PropfileTsarType} from "./redux/profile-reducer";
-import {DialogsPageType} from "./redux/dialogs-reducer";
+import {DialogsPageType, DialogsTsarType} from "./redux/dialogs-reducer";
+
 
 
 export type RootStateType = {
@@ -14,7 +15,7 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
     sidebar: {}
 }
-export type RootActionType = PropfileTsarType | DialogsPageType
+export type RootActionType = PropfileTsarType | DialogsTsarType
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

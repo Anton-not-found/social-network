@@ -45,7 +45,7 @@ export const DialogsReducer = (state: DialogsStateType = initialState, action: D
     }
 }
 
-type DialogsTsarType = ChangeNewMessageTextACType | SendMessageACType
+export type DialogsTsarType = ChangeNewMessageTextACType | SendMessageACType
 
 type ChangeNewMessageTextACType = ReturnType<typeof changeNewMessageTextAC>
 export const changeNewMessageTextAC = (body: string) => {
