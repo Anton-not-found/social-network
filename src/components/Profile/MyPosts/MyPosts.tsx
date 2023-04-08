@@ -1,21 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-export type ProfilePagePropsType = {
-    posts: Array<PostType>
-    messagePost: string
-    updateNewPostText:(text:string)=>void
-    addPost: ()=>void
-}
 
-export type PostType = {
-    id: string
-    message: string
-    likesCount: string
-}
-
-export const MyPosts = (props: ProfilePagePropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
     let postsDataElements = props.posts.map((p,i) => <Post key={i} id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
@@ -25,7 +14,7 @@ export const MyPosts = (props: ProfilePagePropsType) => {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.updateNewPostText(text)
+       props.changeNewText(text)
     }
 
     return (

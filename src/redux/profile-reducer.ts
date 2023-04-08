@@ -30,13 +30,14 @@ export const ProfileReducer = (state: ProfileStateType = initialState, action: P
                 message: state.messageForNewPost,
                 likesCount: '0'
             };
-            state.posts.push(newPost);
             state.messageForNewPost = ''
-            return state
+            return {
+                 ...state, posts: [newPost, ...state.posts]
+            }
 
         case 'CHANGE-NEW-TEXT':
             state.messageForNewPost = action.newText
-            return state
+            return {...state}
 
         default:
             return state
