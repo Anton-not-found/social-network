@@ -18,7 +18,7 @@ const initialState: ProfileStateType = {
         {id: v1(), message: 'It\'s my first post))', likesCount: '6'},
         {id: v1(), message: 'let\'s do it', likesCount: '15'},
         {id: v1(), message: 'Are you sure?', likesCount: '4'}
-    ],
+    ] as Array<PostType>,
     messageForNewPost: ''
 }
 

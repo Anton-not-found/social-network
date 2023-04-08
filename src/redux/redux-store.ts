@@ -5,9 +5,9 @@ import {SidebarReducer} from "./sidebar-reducer";
 
 
 
-export type AppRootState = ReturnType<typeof rootReducers>
+export type AppRootState = ReturnType<typeof rootReducer>
 
-const rootReducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
     sidebar: SidebarReducer
@@ -16,5 +16,5 @@ const rootReducers = combineReducers({
 
 
 
-export const store = createStore(rootReducers);
+export const store = createStore(rootReducer);
 

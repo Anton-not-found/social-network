@@ -9,12 +9,12 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {RootActionType, RootStateType} from "./index";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {store} from "./redux/redux-store";
+
 
 type AppPropsType = {
-    state: RootStateType
-    dispatch: (action: RootActionType) => void
+
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -26,15 +26,8 @@ const App: React.FC<AppPropsType> = (props) => {
             <Sidebar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
-                                                             messagePost={props.state.profilePage.messageForNewPost}
-                                                             dispatch={props.dispatch}
-                    />}/>
-                    <Route path='/dialogs' element={<DialogsContainer dialogs={props.state.dialogsPage.dialogs}
-                                                             messages={props.state.dialogsPage.messages}
-                                                             newMessageBody={props.state.dialogsPage.newMessageBody}
-                                                             dispatch={props.dispatch}
-                    />}/>
+                    <Route path='/profile' element={<Profile />}/>
+                    <Route path='/dialogs' element={<DialogsContainer />}/>
                     <Route path='/news/*' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>

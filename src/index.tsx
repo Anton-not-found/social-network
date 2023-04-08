@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {ProfilePageType, PropfileTsarType} from "./redux/profile-reducer";
 import {DialogsPageType, DialogsTsarType} from "./redux/dialogs-reducer";
+import {Provider} from "react-redux";
 
 
 
@@ -24,7 +25,9 @@ const rerenderEntireTree = (state: RootStateType) => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>
     );

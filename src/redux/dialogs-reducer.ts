@@ -20,13 +20,13 @@ const initialState:DialogsStateType = {
             {id: v1(), name: 'Elena'},
             {id: v1(), name: 'Stepan'},
             {id: v1(), name: 'Mariya'},
-        ],
+        ]as Array<DialogType>,
         messages: [
             {id: v1(), message: 'Hi'},
             {id: v1(), message: 'How are you?'},
             {id: v1(), message: 'What are you learn?'},
             {id: v1(), message: 'Oh my!'}
-        ],
+        ]as Array<MessageType>,
         newMessageBody: ''
 }
 
@@ -34,12 +34,15 @@ export const DialogsReducer = (state: DialogsStateType = initialState, action: D
     switch (action.type) {
         case 'CHANGE-NEW-MESSAGE-BODY':
             state.newMessageBody = action.body;
-            return state
+            return {...state}
         case 'SEND-MESSAGE':
             let body = state.newMessageBody
-            state.messages.push({id: v1(), message: body});
+            let newMessage = {id: v1(), message: body}
+            // state.messages.push({id: v1(), message: body});
             state.newMessageBody = ''
-            return state
+            return {
+                ...state, messages: [...state.messages, newMessage]
+            }
         default:
             return state
     }
