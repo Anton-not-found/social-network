@@ -5,23 +5,21 @@ import {store} from "./redux/redux-store";
 import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {ProfilePageType, PropfileTsarType} from "./redux/profile-reducer";
-import {DialogsPageType, DialogsTsarType} from "./redux/dialogs-reducer";
 import {Provider} from "react-redux";
 
 
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar: {}
-}
-export type RootActionType = PropfileTsarType | DialogsTsarType
+// export type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogsPageType
+//     sidebar: {}
+// }
+// export type RootActionType = PropfileTsarType | DialogsTsarType
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-const rerenderEntireTree = (state: RootStateType) => {
+
     root.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -31,9 +29,8 @@ const rerenderEntireTree = (state: RootStateType) => {
             </BrowserRouter>
         </React.StrictMode>
     );
-}
 
-rerenderEntireTree(store.getState());
+
 
 
 
