@@ -1,44 +1,20 @@
 import React from 'react';
 import s from './Users.module.css';
 import {UsersPropsType} from "./UsersContainer";
-import {v1} from "uuid";
+import axios from "axios";
+import userPhoto from '../../assets/images/userPhoto.png'
 
 
 export const Users = (props: UsersPropsType) => {
-
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: v1(),
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyl8UyqMZ3Du48kkWyWcGxWKPoAYbGpoUPw&usqp=CAU',
-                fallowed: false,
-                fullName: 'Antonio',
-                status: 'I\'m big boss',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyl8UyqMZ3Du48kkWyWcGxWKPoAYbGpoUPw&usqp=CAU',
-                fallowed: true,
-                fullName: 'Andrew',
-                status: 'I\'m small boss',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyl8UyqMZ3Du48kkWyWcGxWKPoAYbGpoUPw&usqp=CAU',
-                fallowed: false,
-                fullName: 'Sasha',
-                status: 'I\'m  a pffff',
-                location: {city: 'Kyiv', country: 'Ukraine'}
-            },
-        ])
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            props.setUsers(response.data.items)
+        });
     }
-
     return (
         <div className={s.users}>
             {
-                props.users.map(el => {
+                props.users.map((el, index) => {
 
                     const onclickFollowHandler = () => {
                         props.follow(el.id)
@@ -50,11 +26,11 @@ export const Users = (props: UsersPropsType) => {
                     }
 
                     return (
-                        <div key={el.id}>
+                        <div key={index}>
                     <span>
                         <div className={s.photo}>
                             <img
-                                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyl8UyqMZ3Du48kkWyWcGxWKPoAYbGpoUPw&usqp=CAU'} alt={''}/>
+                                src={el.photos !== null ? el.photos : userPhoto} alt={''}/>
                         </div>
                         <div>
                             {el.fallowed
@@ -66,12 +42,12 @@ export const Users = (props: UsersPropsType) => {
                     </span>
                             <span>
                         <span>
-                            <div>{el.fullName}</div>
+                            <div>{el.name}</div>
                             <div>{el.status}</div>
                         </span>
                         <span>
-                            <div>{el.location.country}</div>
-                            <div>{el.location.city}</div>
+                            <div>{'el.location.country'}</div>
+                            <div>{'el.location.city'}</div>
                         </span>
                     </span>
                         </div>)
