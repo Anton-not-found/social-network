@@ -1,4 +1,4 @@
-import {combineReducers, legacy_createStore as createStore} from "redux";
+import {combineReducers, legacy_createStore} from "redux";
 import {ProfileReducer} from "./profile-reducer";
 import {DialogsReducer} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
@@ -18,5 +18,5 @@ const rootReducer = combineReducers({
 
 
 
-export const store = createStore(rootReducer);
+export const store = legacy_createStore(rootReducer);
 
