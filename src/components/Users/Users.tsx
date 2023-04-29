@@ -4,13 +4,18 @@ import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 import userPhoto from '../../assets/images/userPhoto.png'
 
-
+export const settings = {
+    withCredentials: true,
+}
 export const Users = (props: UsersPropsType) => {
     if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setUsers(response.data.items)
-        });
+        axios.get('https://social-network.samuraijs.com/api/1.0/users', settings)
+            .then((res) => {
+                props.setUsers(res.data.items)
+
+            });
     }
+
     return (
         <div className={s.users}>
             {
@@ -27,10 +32,10 @@ export const Users = (props: UsersPropsType) => {
 
                     return (
                         <div key={index}>
-                    <span>
+                            <span>
                         <div className={s.photo}>
                             <img
-                                src={el.photos !== null ? el.photos : userPhoto} alt={''}/>
+                                src={el.photos.small !== null ? el.photos.small : userPhoto} alt={''}/>
                         </div>
                         <div>
                             {el.fallowed

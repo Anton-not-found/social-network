@@ -5,9 +5,12 @@ export type UsersType = {
 
 export type UserType = {
     id: string
-    photoUrl: string
+    photos: {
+        small: string
+        large: string
+    }
     fallowed:boolean
-    fullName:string
+    name:string
     status: string
     location: {
         city: string,
