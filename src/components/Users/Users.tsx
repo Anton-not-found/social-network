@@ -7,26 +7,27 @@ import userPhoto from '../../assets/images/userPhoto.png'
 export const settings = {
     withCredentials: true,
 }
-export const Users = (props: UsersPropsType) => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users', settings)
-            .then((res) => {
-                props.setUsers(res.data.items)
 
-            });
+export class Users extends React.Component<UsersPropsType> {
+    constructor(props:UsersPropsType) {
+        super(props);
+            axios.get('https://social-network.samuraijs.com/api/1.0/users', settings)
+                .then((res) => {
+                    this.props.setUsers(res.data.items)
+                });
     }
 
-    return (
-        <div className={s.users}>
+    render() {
+        return <div className={s.users}>
             {
-                props.users.map((el, index) => {
+                this.props.users.map((el, index) => {
 
                     const onclickFollowHandler = () => {
-                        props.follow(el.id)
+                        this.props.follow(el.id)
 
                     }
                     const onclickUnfollowHandler = () => {
-                        props.unFollow(el.id)
+                        this.props.unFollow(el.id)
 
                     }
 
@@ -58,7 +59,6 @@ export const Users = (props: UsersPropsType) => {
                         </div>)
                 })
             }
-        </div>
-    );
-};
-
+        </div>;
+    }
+}
