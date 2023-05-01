@@ -1,6 +1,8 @@
-
 export type UsersType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type UserType = {
@@ -9,8 +11,8 @@ export type UserType = {
         small: string
         large: string
     }
-    fallowed:boolean
-    name:string
+    fallowed: boolean
+    name: string
     status: string
     location: {
         city: string,
@@ -19,9 +21,10 @@ export type UserType = {
 }
 
 const initialState: UsersType = {
-    users: [
-
-    ] as Array<UserType>
+    users: [] as Array<UserType>,
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export const UserReducer = (state: UsersType = initialState, action: UsersTsarType): UsersType => {
@@ -29,27 +32,39 @@ export const UserReducer = (state: UsersType = initialState, action: UsersTsarTy
         case 'FOLLOW':
             return {
                 ...state, users: state.users.map(el => el.id === action.payload.userId ?
-                    {...el, fallowed : true}  : el)
+                    {...el, fallowed: true} : el)
             }
         case 'UN-FOLLOW':
             return {
                 ...state, users: state.users.map(el => el.id === action.payload.userId ?
-                    {...el, fallowed : false}  : el)
+                    {...el, fallowed: false} : el)
             }
         case 'SET-USERS':
             return {
-                ...state, users: [...state.users, ...action.payload.users]
+                ...state, users: action.payload.users
+            }
+        case 'SET-CURRENT-PAGE':
+            return {
+                ...state, currentPage: action.payload.pageNumber
+            }
+        case 'SET-TOTLA-USER-COUNT':
+            return {
+                ...state, totalUsersCount: (action.payload.totalCount)/150
             }
         default:
             return state
     }
 }
 
-export type UsersTsarType = ChangeFollow | ChangeUnFollow | SetUsersType
+export type UsersTsarType = ChangeFollow
+    | ChangeUnFollow
+    | SetUsersType
+    | SetCurrentPageType
+    | SetUsersTotalCountType
 
 
 type ChangeFollow = ReturnType<typeof changeFollowAC>
-export const changeFollowAC = (userId:string) => {
+export const changeFollowAC = (userId: string) => {
     return {
         type: 'FOLLOW',
         payload: {
@@ -59,7 +74,7 @@ export const changeFollowAC = (userId:string) => {
 }
 
 type ChangeUnFollow = ReturnType<typeof changeUnFollowAC>
-export const changeUnFollowAC = (userId:string) => {
+export const changeUnFollowAC = (userId: string) => {
     return {
         type: 'UN-FOLLOW',
         payload: {
@@ -69,12 +84,33 @@ export const changeUnFollowAC = (userId:string) => {
 }
 
 type SetUsersType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users:Array<UserType>) => {
-    return{
+export const setUsersAC = (users: Array<UserType>) => {
+    return {
         type: 'SET-USERS',
         payload: {
             users
         }
-    }as const
+    } as const
 }
+
+type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
+export const setCurrentPageAC = (pageNumber: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        payload: {
+            pageNumber
+        }
+    } as const
+}
+
+type SetUsersTotalCountType = ReturnType<typeof setUsersTotalCountAC>
+export const setUsersTotalCountAC = (totalCount: number) => {
+    return {
+        type: 'SET-TOTLA-USER-COUNT',
+        payload: {
+            totalCount
+        }
+    } as const
+}
+
 

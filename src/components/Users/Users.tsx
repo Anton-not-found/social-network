@@ -9,26 +9,47 @@ export const settings = {
 }
 
 export class Users extends React.Component<UsersPropsType> {
-    constructor(props:UsersPropsType) {
-        super(props);
-            axios.get('https://social-network.samuraijs.com/api/1.0/users', settings)
-                .then((res) => {
-                    this.props.setUsers(res.data.items)
-                });
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, settings)
+            .then((res) => {
+                this.props.setUsers(res.data.items)
+                this.props.setTotalUsersCount(res.data.totalCount)
+            });
+    }
+     onPageChanged = (pageNumber:number) => {
+        this.props.setCurrentPage(pageNumber)
+         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, settings)
+             .then((res) => {
+                 this.props.setUsers(res.data.items)
+             });
     }
 
     render() {
+        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
+
         return <div className={s.users}>
+            <div>
+                {pages.map((p, index) => {
+
+                    return (
+                        <span key={index}
+                              className={this.props.currentPage === p ? s.selectedPage : s.page}
+                              onClick={(e)=>{this.onPageChanged(p)}}
+                        >{p}</span>)
+                })}
+            </div>
             {
                 this.props.users.map((el, index) => {
 
                     const onclickFollowHandler = () => {
                         this.props.follow(el.id)
-
                     }
                     const onclickUnfollowHandler = () => {
                         this.props.unFollow(el.id)
-
                     }
 
                     return (
