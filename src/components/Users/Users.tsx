@@ -38,7 +38,7 @@ export class Users extends React.Component<UsersPropsType> {
                     return (
                         <span key={index}
                               className={this.props.currentPage === p ? s.selectedPage : s.page}
-                              onClick={(e)=>{this.onPageChanged(p)}}
+                              onClick={()=>{this.onPageChanged(p)}}
                         >{p}</span>)
                 })}
             </div>
