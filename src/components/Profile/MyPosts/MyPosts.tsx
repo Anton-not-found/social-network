@@ -8,7 +8,6 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     let postsDataElements = props.posts.map((p,i) => <Post key={i} id={p.id} message={p.message} likesCount={p.likesCount}/>);
 
-    console.log(props.messagePost)
     const onClickButtonHandler = () => {
         props.addPost();
     }

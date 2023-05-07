@@ -6,8 +6,6 @@ import {UserReducer} from "./users-reducer";
 
 
 
-export type AppRootState = ReturnType<typeof rootReducer>
-
 const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
@@ -15,8 +13,8 @@ const rootReducer = combineReducers({
     usersPage: UserReducer
 });
 
-
-
-
 export const store = legacy_createStore(rootReducer);
+
+export type AppRootState = ReturnType<typeof rootReducer>
+
 

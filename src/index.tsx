@@ -9,13 +9,6 @@ import {Provider} from "react-redux";
 
 
 
-// export type RootStateType = {
-//     profilePage: ProfilePageType
-//     dialogsPage: DialogsPageType
-//     sidebar: {}
-// }
-// export type RootActionType = PropfileTsarType | DialogsTsarType
-
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

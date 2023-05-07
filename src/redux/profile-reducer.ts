@@ -1,10 +1,22 @@
 import {v1} from "uuid";
 
 
+export type ProfileType = {
+    userId: number
+    fullName: string
+    aboutMe: string
+    photos: {
+        small: string
+        large: string
+    }
+}
+
 type ProfileStateType = ProfilePageType
+
 export type ProfilePageType = {
     posts: Array<PostType>
     messageForNewPost: string
+    profile: ProfileType
 }
 export type PostType = {
     id: string
@@ -19,7 +31,9 @@ const initialState: ProfileStateType = {
         {id: v1(), message: 'let\'s do it', likesCount: '15'},
         {id: v1(), message: 'Are you sure?', likesCount: '4'}
     ] as Array<PostType>,
-    messageForNewPost: ''
+    messageForNewPost: '',
+    profile: {} as ProfileType
+
 }
 
 export const ProfileReducer = (state: ProfileStateType = initialState, action: PropfileTsarType): ProfileStateType => {
@@ -32,19 +46,24 @@ export const ProfileReducer = (state: ProfileStateType = initialState, action: P
             };
             state.messageForNewPost = ''
             return {
-                 ...state, posts: [newPost, ...state.posts]
+                ...state, posts: [newPost, ...state.posts]
             }
 
         case 'CHANGE-NEW-TEXT':
             state.messageForNewPost = action.newText
             return {...state}
 
+        case 'SET-USER-PROFILE':
+            return {
+                ...state, profile: action.payload.profile
+            }
+
         default:
             return state
     }
 }
 
-export type PropfileTsarType = AddPostACType | ChangeNewTextACType
+export type PropfileTsarType = AddPostACType | ChangeNewTextACType | SetUserProfileACType
 
 type AddPostACType = ReturnType<typeof addPostAC>
 export const addPostAC = () => {
@@ -61,4 +80,13 @@ export const changeNewTextAC = (newText: string) => {
     } as const
 }
 
+type SetUserProfileACType = ReturnType<typeof setUserProfileAC>
+export const setUserProfileAC = (profile: ProfileType) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        payload: {
+            profile
+        }
+    } as const
+}
 

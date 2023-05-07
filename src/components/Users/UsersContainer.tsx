@@ -78,7 +78,7 @@ const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-//  "#0b93cd"
+
 
 
 export default connect(mapStateToProps, {
