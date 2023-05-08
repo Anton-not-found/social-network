@@ -6,9 +6,17 @@
 
 }
 
+.loginBlock {
+    margin-left: 200px;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: #251919;
+}
+
 .headerLogo {
     /*border: 1px solid #56f806;*/
-
 
 }
 

@@ -5,18 +5,20 @@ export type ProfileType = {
     userId: number
     fullName: string
     aboutMe: string
-    photos: {
-        small: string
-        large: string
-    }
+    photos: ProfilePhotosType
+    lookingForAJob: boolean
 }
 
+type ProfilePhotosType = {
+    small: string
+    large: string
+}
 type ProfileStateType = ProfilePageType
 
 export type ProfilePageType = {
     posts: Array<PostType>
     messageForNewPost: string
-    profile: ProfileType
+    profile: any
 }
 export type PostType = {
     id: string
@@ -32,8 +34,7 @@ const initialState: ProfileStateType = {
         {id: v1(), message: 'Are you sure?', likesCount: '4'}
     ] as Array<PostType>,
     messageForNewPost: '',
-    profile: {} as ProfileType
-
+    profile: null
 }
 
 export const ProfileReducer = (state: ProfileStateType = initialState, action: PropfileTsarType): ProfileStateType => {

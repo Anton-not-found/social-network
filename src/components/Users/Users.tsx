@@ -3,6 +3,8 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/userPhoto.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+import {settings} from "./UsersContainer";
 
 
 type UsersPropsType = {
@@ -13,6 +15,8 @@ type UsersPropsType = {
     follow: (userId: string) => void
     unFollow: (userId: string) => void
     onPageChanged: (pageNumber: number) => void
+    followingInProgress: boolean
+    toggleFollowingProgress: (followingInProgress: boolean)=>void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -40,24 +44,39 @@ export const Users = (props: UsersPropsType) => {
                     props.users.map((el, index) => {
 
                         const onclickFollowHandler = () => {
-                            props.follow(el.id)
+                            props.toggleFollowingProgress(true)
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, settings)
+                                .then((responce) => {
+                                    if (responce.data.resultCode === 0) {
+                                        props.follow(el.id)
+                                    }
+                                    props.toggleFollowingProgress(false)
+                                });
+
                         }
                         const onclickUnfollowHandler = () => {
-                            props.unFollow(el.id)
+                            props.toggleFollowingProgress(true)
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, settings)
+                                .then((responce) => {
+                                    if (responce.data.resultCode === 0) {
+                                        props.unFollow(el.id)
+                                    }
+                                    props.toggleFollowingProgress(false)
+                                });
                         }
 
                         return (
                             <div key={index}>
                             <span>
                         <div className={s.photo}>
-                            <NavLink to={'/profile/*' + el.id}>
+                            <NavLink to={'/profile/' + el.id}>
                             <img src={el.photos.small !== null ? el.photos.small : userPhoto} alt={''}/>
                             </NavLink>
                         </div>
                         <div>
-                            {el.fallowed
-                                ? <button onClick={onclickUnfollowHandler}>Unfollow</button>
-                                : <button onClick={onclickFollowHandler}>Follow</button>
+                            {el.followed
+                                ? <button disabled={props.followingInProgress} onClick={onclickUnfollowHandler}>Unfollow</button>
+                                : <button disabled={props.followingInProgress} onClick={onclickFollowHandler}>Follow</button>
                             }
 
                         </div>
