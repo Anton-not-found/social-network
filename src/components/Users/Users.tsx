@@ -12,11 +12,11 @@ type UsersPropsType = {
     pageSize: number
     currentPage: number
     users: Array<UserType>
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
-    followingInProgress: boolean
-    toggleFollowingProgress: (followingInProgress: boolean)=>void
+    followingInProgress: Array<number>
+    toggleFollowingProgress: (userId: number, isFetching: boolean) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -44,24 +44,24 @@ export const Users = (props: UsersPropsType) => {
                     props.users.map((el, index) => {
 
                         const onclickFollowHandler = () => {
-                            props.toggleFollowingProgress(true)
+                            props.toggleFollowingProgress(el.id,true)
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, settings)
                                 .then((responce) => {
                                     if (responce.data.resultCode === 0) {
                                         props.follow(el.id)
                                     }
-                                    props.toggleFollowingProgress(false)
+                                    props.toggleFollowingProgress(el.id,false)
                                 });
 
                         }
                         const onclickUnfollowHandler = () => {
-                            props.toggleFollowingProgress(true)
+                            props.toggleFollowingProgress(el.id,true)
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, settings)
                                 .then((responce) => {
                                     if (responce.data.resultCode === 0) {
                                         props.unFollow(el.id)
                                     }
-                                    props.toggleFollowingProgress(false)
+                                    props.toggleFollowingProgress(el.id,false)
                                 });
                         }
 
@@ -75,8 +75,10 @@ export const Users = (props: UsersPropsType) => {
                         </div>
                         <div>
                             {el.followed
-                                ? <button disabled={props.followingInProgress} onClick={onclickUnfollowHandler}>Unfollow</button>
-                                : <button disabled={props.followingInProgress} onClick={onclickFollowHandler}>Follow</button>
+                                ? <button disabled={props.followingInProgress.some(id => id === el.id)}
+                                          onClick={onclickUnfollowHandler}>Unfollow</button>
+                                : <button disabled={props.followingInProgress.some(id=> id === el.id)}
+                                          onClick={onclickFollowHandler}>Follow</button>
                             }
 
                         </div>
